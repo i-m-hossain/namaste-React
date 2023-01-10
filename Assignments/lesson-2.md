@@ -1,5 +1,6 @@
 # Assignent--2(Ignite our app)
 Theory Assignment:
+
     ● - What is `NPM`?
         - NPM is an open source repository of different packages that is used to manage packages, develop application and websites
 
