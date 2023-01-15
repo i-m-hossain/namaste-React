@@ -1,4 +1,4 @@
-# Assignent--2(Laying foundation)
+# Assignent--3(Laying foundation)
 Theory Assignment:
     ● - What is `JSx`?
         Ans: It is an extension of javascript that allows allows us to write html like syntax in our javascript code. This code is transpiled by bable and converted into React.createElement. Which is further converted into DOM 
