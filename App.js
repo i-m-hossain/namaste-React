@@ -1,52 +1,58 @@
 import React from "react";
 import ReactDOM from "react-dom/client ";
 import "./index.css";
+import config from "./api/config";
+const Header = () => {
+  return (
+    <nav className="navbar">
+      <img
+        className="logo"
+        src="https://yt3.ggpht.com/ytc/AMLnZu_EC-ECXAxRAixWGEfMsE1rdSoetBHyxmLNdtCB=s900-c-k-c0x00ffffff-no-rj"
+        alt="logo"
+      />
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact Us</li>
+        <li>Login</li>
+        <li>Cart</li>
+      </ul>
+    </nav>
+  );
+};
+const RestaurantCard = ({name, vendor_hero_listing_image, cuisines, rating , review_number}) => {
+  return (
+    <div className="card">
+      <img src={vendor_hero_listing_image} alt={name}/>
+      <h2>{name}</h2>
+      <h3>Rating: {rating} star ({review_number})</h3>
+      <ul> Cuisines:{cuisines.map(c=> <li key={c.id}>{c.name}</li>)}</ul>
+    </div>
+  );
+};
+const RestaurantList=()=>{
+  return (
+    <div className="restaurant-list">
+      {config.items.map((item) => (
+        <RestaurantCard {...item.vendor.details} key={item.reservation_code} />
+      ))}
+    </div>
+  )
+}
+const Body = () => {
+  return (
+    <RestaurantList/>
+  );
+};
+const Footer = () => <footer>This footer</footer>;
 
-/*-- Create a nested header element using React.createElement(h1, h2, h3 inside a div with class title) ---*/
-const heading1 = React.createElement("h1", { id: "h1", key: "h1" }, "heading1");
-const heading2 = React.createElement("h2", { id: "h2", key: "h2" }, "heading2");
-const heading3 = React.createElement("h1", { id: "h3", key: "h3" }, "heading3");
-const container = React.createElement("div", { className: "title" }, [
-  heading1,
-  heading2,
-  heading3,
-]);
-
-/*
- ** create the same element using `JSX`
- ** pass attributes into the tag  in JSX
- */
-const containerWithJSX = (
-  <div className="title">
-    <h1 id="h1">heading 1</h1>
-    <h2 id="h2">heading 2</h2>
-    <h3 id="h3">heading 3</h3>
-  </div>
+const AppLayout = () => (
+  <>
+    <Header></Header>
+    <Body></Body>
+    <Footer></Footer>
+  </>
 );
-
-/*
- ** create a functional component  of the same with `JSX`?
- ** `composition` of component(Add a component inside another)
- */
-const Headers = () => (
-  <div className="title">
-    <h1 id="h1">heading 1</h1>
-    <h2 id="h2">heading 2</h2>
-    <h3 id="h3">heading 3</h3>
-  </div>
-);
-const Container = () => <Headers />;
-/* ----{titleComponent} vs {<TitleComponent/>} vs {<TitleComponent></TitleComponent>} ?---- */
-
-const titleComponent = <h1>It is an element </h1>
-const TitleComponent  = ()=> <div>{titleComponent}</div>
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-// root.render(<TitleComponent />);
-root.render(<TitleComponent></TitleComponent> );
-
-<div>
-  <h1></h1>
-  <h2></h2>
-  <h3></h3>
-</div>;
+root.render(<AppLayout />);
