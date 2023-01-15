@@ -1,9 +1,25 @@
 # Assignent--2(Laying foundation)
 Theory Assignment:
     ● - What is `JSx`?
+        Ans: It is an extension of javascript that allows allows us to write html like syntax in our javascript code. This code is transpiled by bable and converted into React.createElement. Which is further converted into DOM 
     ● - Super powers of JSX
+        Ans: 
+            i. Allows us to write HTML like syntax
+            ii. Converts into React.createElement
+            iii. Do sanitization to prevent XSS attack
+            iv. Allows us to write javascript code inside jsx
+            
     ● - Role of type attribute in script tag? what options can we use there?
+        Ans: The HTML <script> type Attribute is used to specify the MIME type of script and identify the content of the Tag. It has a Default value which is “text/javascript”.
+
+        Options we can use: 
+            i. text/javascript (this is default)
+            ii. text/ecmascript
+            iii. application/ecmascript
+            iv. application/javascript
     ● - {titleComponent} vs {<TitleComponent/>} vs {<TitleComponent></TitleComponent>} ?
+        Ans: titleComponent ~ is a React Element
+            <TitleComponent/> and <TitleComponent></TitleComponent> ~ both are React component. First one is used when no the componenent doesn't have any children;
 
 Coding Assignment:
     ● - Create a nested header element using React.createElement(h1, h2, h3 inside a div with class title)
