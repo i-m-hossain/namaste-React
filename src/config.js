@@ -1,4 +1,4 @@
-export default config = {
+export const config = {
   offer_id: "2103020895",
   status: 1,
   status_text: "Offered",
