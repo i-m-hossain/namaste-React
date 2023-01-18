@@ -3,13 +3,13 @@ import ReactDOM from "react-dom/client ";
 import "./index.css";
 import Header from "./components/Header";
 import Body from "./components/Body";
-import Footer from "./components/Footer";
+import * as Foo from "./components/Footer";
 
 const AppLayout = () => (
   <>
     <Header/>
     <Body/>
-    <Footer/>
+    <Foo.Footer />
   </>
 );
 

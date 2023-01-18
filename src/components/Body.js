@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { config } from "../config.js";
 import RestaurantCard from "./RestaurantCard";
+
+const filterData = (restaurants, searchTerm) => {
+  return restaurants.filter((item) =>
+    item.vendor.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+};
 const Body = () => {
   const [searchEnabled, setSearchEnable] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [restaurants, setRestaurants] = useState(config.items);
+
   const handleSearch = () => {
-    setSearchEnable(true)
-    const filteredData = config.items.filter((item) =>
-      item.vendor.name.toLowerCase().includes(searchText.toLowerCase())
-    );
+    setSearchEnable(true);
+    const filteredData = filterData(config.items, searchText)
     setRestaurants(filteredData);
   };
   return (
