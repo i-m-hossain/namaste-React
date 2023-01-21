@@ -1,22 +1,24 @@
+import {constants} from "../config"
+
 const RestaurantCard = ({
   name,
-  vendor_hero_listing_image,
+  cloudinaryImageId,
   cuisines,
-  rating,
-  review_number,
+  avgRating,
+  totalRatings
 }) => {
   return (
     <div className="card">
-      <img src={vendor_hero_listing_image} alt={name} />
+      <img src={`${constants.imagePrefix}/${cloudinaryImageId}`} alt={name} />
       <h2>{name}</h2>
       <h3>
-        Rating: {rating} star ({review_number})
+        Rating: {avgRating} star ({totalRatings})
       </h3>
       <ul>
         {" "}
         Cuisines:
-        {cuisines.map((c) => (
-          <li key={c.id}>{c.name}</li>
+        {cuisines.map((c,i) => (
+          <li key={i}>{c}</li>
         ))}
       </ul>
     </div>

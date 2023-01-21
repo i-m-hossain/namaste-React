@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const Title = () => {
   return (
     <img
@@ -9,6 +11,7 @@ const Title = () => {
 };
 
 const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false) 
   return (
     <nav className="navbar">
       <Title />
@@ -16,8 +19,11 @@ const Header = () => {
         <li>Home</li>
         <li>About</li>
         <li>Contact Us</li>
-        <li>Login</li>
+        <li>
+          <button onClick={e=> setIsLoggedIn(prev=> !prev)}>{isLoggedIn ? "Logout": "Login"} </button>
+        </li>
         <li>Cart</li>
+    
       </ul>
     </nav>
   );

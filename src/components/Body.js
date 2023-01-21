@@ -1,52 +1,72 @@
-import { useState } from "react";
-import { config } from "../config.js";
+import { useEffect, useState } from "react";
+import { constants } from "../config.js";
+import Loading from "./Loading.js";
 import RestaurantCard from "./RestaurantCard";
 
 const filterData = (restaurants, searchTerm) => {
-  return restaurants.filter((item) =>
-    item.vendor.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+    return restaurants.filter((item) =>
+        item.data.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 };
 const Body = () => {
-  const [searchEnabled, setSearchEnable] = useState(false);
-  const [searchText, setSearchText] = useState("");
-  const [restaurants, setRestaurants] = useState(config.items);
+    const [searchText, setSearchText] = useState("");
+    const [allRestaurants, setAllRestaurants] = useState([]);
+    const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+    useEffect(() => {
+        getAllRestaurantList();
+    }, []);
+    async function getAllRestaurantList() {
+        try {
+            setLoading(true);
+            const response = await fetch(constants.allRestaurantsAPI);
+            const result = await response.json();
+            setAllRestaurants(result?.data?.cards[2]?.data?.data?.cards);
+            setFilteredRestaurants(result?.data?.cards[2]?.data?.data?.cards);
+            setLoading(false);
+        } catch (err) {
+            setError(err)
+        }
+    }
 
-  const handleSearch = () => {
-    setSearchEnable(true);
-    const filteredData = filterData(config.items, searchText)
-    setRestaurants(filteredData);
-  };
-  return (
-    <>
-      <div className="searchbar">
-        <input
-          type="text"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-          placeholder="Search your favourite food"
-        />
-        <button type="button" onClick={handleSearch}>
-          Search
-        </button>
-      </div>
-      {searchEnabled && (
-        <h4>
-          Result found: {restaurants.length}/{config.items.length}
-        </h4>
-      )}
+    const handleSearch = () => {
+        const filteredData = filterData(allRestaurants, searchText);
+        setFilteredRestaurants(filteredData);
+    };
+    if (loading) {
+        return (
+            <div style={{ display: "flex" }}>
+                <Loading length={5} />
+            </div>
+        );
+    }
+    return (
+        <>
+            <div className="searchbar">
+                <input
+                    type="text"
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                    placeholder="Search your favorite food"
+                />
+                <button type="button" onClick={handleSearch}>
+                    Search
+                </button>
+            </div>
 
-      <div className="restaurant-list">
-        {restaurants.map((item) => (
-          <RestaurantCard
-            {...item.vendor.details}
-            key={item.reservation_code}
-          />
-        ))}
-      </div>
-    </>
-  );
+            {filteredRestaurants.length ? (
+                <div className="restaurant-list">
+                    {filteredRestaurants?.map((item) => (
+                        <RestaurantCard {...item.data} key={item?.data?.id} />
+                    ))}
+                </div>
+            ) : (
+                <p> No data found! search another food.</p>
+            )}
+        </>
+    );
 };
 
 export default Body;
