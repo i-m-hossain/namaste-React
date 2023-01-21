@@ -19,6 +19,7 @@ const Body = () => {
     async function getAllRestaurantList() {
         setLoading(true);
         const response = await fetch(constants.allRestaurantsAPI);
+        console.log({response})
         const result = await response.json();
         setAllRestaurants(result?.data?.cards[2]?.data?.data?.cards);
         setFilteredRestaurants(result?.data?.cards[2]?.data?.data?.cards);
