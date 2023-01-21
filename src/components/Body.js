@@ -13,17 +13,21 @@ const Body = () => {
     const [allRestaurants, setAllRestaurants] = useState([]);
     const [filteredRestaurants, setFilteredRestaurants] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
     useEffect(() => {
         getAllRestaurantList();
     }, []);
     async function getAllRestaurantList() {
-        setLoading(true);
-        const response = await fetch(constants.allRestaurantsAPI);
-        console.log({response})
-        const result = await response.json();
-        setAllRestaurants(result?.data?.cards[2]?.data?.data?.cards);
-        setFilteredRestaurants(result?.data?.cards[2]?.data?.data?.cards);
-        setLoading(false);
+        try {
+            setLoading(true);
+            const response = await fetch(constants.allRestaurantsAPI);
+            const result = await response.json();
+            setAllRestaurants(result?.data?.cards[2]?.data?.data?.cards);
+            setFilteredRestaurants(result?.data?.cards[2]?.data?.data?.cards);
+            setLoading(false);
+        } catch (err) {
+            setError(err)
+        }
     }
 
     const handleSearch = () => {
@@ -31,7 +35,11 @@ const Body = () => {
         setFilteredRestaurants(filteredData);
     };
     if (loading) {
-        return <div style={{display: "flex",  }}><Loading length={5} /></div>;
+        return (
+            <div style={{ display: "flex" }}>
+                <Loading length={5} />
+            </div>
+        );
     }
     return (
         <>
