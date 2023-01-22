@@ -106,3 +106,9 @@
 .m-t-24 {
     margin-top: 24px;
 }
+
+.menu{
+    padding: 10px;
+    border: 1px solid;
+    display: flex;
+}

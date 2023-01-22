@@ -1,10 +1,11 @@
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
+import logo from "../assets/img/logo.svg"
 const Title = () => {
   return (
     <img
-      className="logo"
-      src="https://play-lh.googleusercontent.com/1keEOkk2GrxZpaRH73-vDqpAXhJNU9tbP5mfk82X6YxH8EhnU2JPOb5w1FLUJiqkEg"
+      
+      src={logo}
       alt="FOOD-PANDA"
     />
   );
@@ -16,13 +17,13 @@ const Header = () => {
     <nav className="navbar">
       <Title />
       <ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>Contact Us</li>
+        <Link to={'/'}><li>Home</li></Link>
+        <Link to={"/about"}><li>About</li></Link>
+        <Link to={"/contact"}><li>Contact Us</li></Link>
+        <li>Cart</li>
         <li>
           <button onClick={e=> setIsLoggedIn(prev=> !prev)}>{isLoggedIn ? "Logout": "Login"} </button>
         </li>
-        <li>Cart</li>
     
       </ul>
     </nav>
