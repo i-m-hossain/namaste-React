@@ -12,12 +12,19 @@ There are two ways to add images into our app.
 
     ```
         import imageName from "./directory/imageName.extension"
+
+        inside component:
+
+        <img src={imageName}>
     ```
 
 
 ## What would happen if we do console.log(useState())?
 
-Ans: useState returns two things. 1. state value 2. a setter function. So consoling useState without any argument will return a value(undefined), and an empty setter function
+Ans: useState returns two things. 
+    1. state value 
+    2. a setter function
+    So consoling useState without any argument will return a value(undefined), and an empty setter function
 
 ## How will useEffect behave if we don't add a dependency array ?
 Ans: useEffect will be rerendered at every state change.
@@ -33,14 +40,21 @@ It allows users to use websites without loading whole new pages from the server,
 On a webapp that uses server side routing:
 
 - The browser detects that the user has clicked on an anchor element.
+
 - It makes an HTTP GET request to the URL found in the href tag
+
 - The server processes the request, and sends a new document (usually HTML) as a response.
+
 - The browser discards the old webpage altogether, and displays the newly downloaded one.
+
 - If the webapp uses client side routing:
 ...
 
 The browser detects that the user has clicked on an anchor element, just like before.
 - A client side code (usually the routing library) catches this event, detects that the URL is not an external link, and then prevents the browser from making the HTTP GET request.
+
 - The routing library then manually changes the URL displayed in the browser (using the HTML5 history API, or maybe URL hashbangs on older browsers)
+
 - The routing library then changes the state of the client app. For example, it can change the root React/Angular/etc component according to the route rules.
+
 - The app (particularly the MVC library, like React) then processes state changes. It renders the new components, and if necessary, it requests new data from the server. But this time the response isn't necessarily an entire webpage, it may also be "raw" data, in which case the client-side code turns it into HTML elements.
