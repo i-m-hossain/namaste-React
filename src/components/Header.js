@@ -13,6 +13,7 @@ const Title = () => {
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false) 
+  
   return (
     <nav className="navbar">
       <Title />

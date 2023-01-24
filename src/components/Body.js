@@ -64,7 +64,7 @@ const Body = () => {
                             to={"/restaurant/" + item.data.id}
                             key={item?.data?.id}
                         >
-                            <RestaurantCard {...item.data} />
+                            <RestaurantCard {...item.data}  />
                         </Link>
                     ))}
                 </div>
