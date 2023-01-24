@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { constants } from "../config.js";
-import Loading from "./Loading.js";
+import Shimmer from "./Shimmer.js";
 import RestaurantCard from "./RestaurantCard";
+import { Link } from "react-router-dom";
 
 const filterData = (restaurants, searchTerm) => {
     return restaurants.filter((item) =>
@@ -26,7 +27,7 @@ const Body = () => {
             setFilteredRestaurants(result?.data?.cards[2]?.data?.data?.cards);
             setLoading(false);
         } catch (err) {
-            setError(err)
+            setError(err);
         }
     }
 
@@ -37,7 +38,7 @@ const Body = () => {
     if (loading) {
         return (
             <div style={{ display: "flex" }}>
-                <Loading length={5} />
+                <Shimmer length={5} />
             </div>
         );
     }
@@ -59,7 +60,12 @@ const Body = () => {
             {filteredRestaurants.length ? (
                 <div className="restaurant-list">
                     {filteredRestaurants?.map((item) => (
-                        <RestaurantCard {...item.data} key={item?.data?.id} />
+                        <Link
+                            to={"/restaurant/" + item.data.id}
+                            key={item?.data?.id}
+                        >
+                            <RestaurantCard {...item.data}  />
+                        </Link>
                     ))}
                 </div>
             ) : (
