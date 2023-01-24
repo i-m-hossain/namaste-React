@@ -1,4 +1,4 @@
-# Theory assignment
+# Finding the path (lesson-7)
 
 ## What are various ways to add images into our App? Explain with code examples
 There are two ways to add images into our app.
