@@ -1,40 +1,35 @@
-import { useEffect, useState } from "react";
-import { constants } from "../config.js";
 import Shimmer from "./Shimmer.js";
 import RestaurantCard from "./RestaurantCard";
 import { Link } from "react-router-dom";
+import { filterData } from "../utils/helper.js";
+import useAllRestaurants from "../hooks/useAllRestaurants.js";
+import { useState } from "react";
+import useOnline from "../hooks/useOnline.js";
 
-const filterData = (restaurants, searchTerm) => {
-    return restaurants.filter((item) =>
-        item.data.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-};
 const Body = () => {
     const [searchText, setSearchText] = useState("");
-    const [allRestaurants, setAllRestaurants] = useState([]);
-    const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-    useEffect(() => {
-        getAllRestaurantList();
-    }, []);
-    async function getAllRestaurantList() {
-        try {
-            setLoading(true);
-            const response = await fetch(constants.allRestaurantsAPI);
-            const result = await response.json();
-            setAllRestaurants(result?.data?.cards[2]?.data?.data?.cards);
-            setFilteredRestaurants(result?.data?.cards[2]?.data?.data?.cards);
-            setLoading(false);
-        } catch (err) {
-            setError(err);
-        }
-    }
+    const {
+        allRestaurants,
+        error,
+        loading,
+        filteredRestaurants,
+        setFilteredRestaurants,
+    } = useAllRestaurants();
+    const onLine = useOnline();
 
     const handleSearch = () => {
         const filteredData = filterData(allRestaurants, searchText);
         setFilteredRestaurants(filteredData);
     };
+    // Early exit if user is not online
+    if (!onLine) {
+        return <h2>❌ You are offline ❌</h2>;
+    }
+    if(error){
+        return <h2>{error.message}. try again</h2>
+    }
+
+    // Loading state while fetching data
     if (loading) {
         return (
             <div style={{ display: "flex" }}>
@@ -42,6 +37,7 @@ const Body = () => {
             </div>
         );
     }
+    // UI with data
     return (
         <>
             <div className="searchbar">
@@ -64,7 +60,7 @@ const Body = () => {
                             to={"/restaurant/" + item.data.id}
                             key={item?.data?.id}
                         >
-                            <RestaurantCard {...item.data}  />
+                            <RestaurantCard {...item.data} />
                         </Link>
                     ))}
                 </div>

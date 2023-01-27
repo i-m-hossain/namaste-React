@@ -1,25 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { constants } from "../config";
+import useRestaurant from "../hooks/useRestaurant";
 import Shimmer from "./Shimmer";
 
 function RestaurantMenu() {
-    const { id } = useParams();
-    const [restaurant, setRestaurant] = useState(null);
-    const [error, setError] = useState("");
-    useEffect(() => {
-        fetchRestaurantData(id);
-    }, [id]);
-    const fetchRestaurantData = async () => {
-        try {
-            const response = await fetch(`${constants.singleRestaurant}${id}`);
-            const data = await response.json();
-            setRestaurant(data.data);
-        } catch (err) {
-            setError(err);
-            console.log(err);
-        }
-    };
+    const { resId } = useParams();
+    const {error, restaurant} = useRestaurant(resId)
 
     if (error) {
         return <p>there is an error</p>;
