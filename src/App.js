@@ -14,6 +14,7 @@ import Profile from "./components/ProfileClass";
 
 // lazy loading
 const About = lazy(() => import("./components/About"));
+
 const AppLayout = () => (
     <>
         <Header />
