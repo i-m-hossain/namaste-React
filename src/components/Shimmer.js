@@ -1,3 +1,4 @@
+import "../shimmer.css"
 const Shimmer = ({ length }) => {
     console.log(length);
     return (

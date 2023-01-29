@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper.js";
 import useAllRestaurants from "../hooks/useAllRestaurants.js";
 import { useState } from "react";
-import useOnline from "../hooks/useOnline.js";
+
+// my npm module
+import useOnLineChecker from "online-checker";
+import SearchBar from "./SearchBar.js";
 
 const Body = () => {
     const [searchText, setSearchText] = useState("");
@@ -15,9 +18,10 @@ const Body = () => {
         filteredRestaurants,
         setFilteredRestaurants,
     } = useAllRestaurants();
-    const onLine = useOnline();
-
-    const handleSearch = () => {
+    const onLine = useOnLineChecker();
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if(!allRestaurants) return;
         const filteredData = filterData(allRestaurants, searchText);
         setFilteredRestaurants(filteredData);
     };
@@ -25,8 +29,8 @@ const Body = () => {
     if (!onLine) {
         return <h2>❌ You are offline ❌</h2>;
     }
-    if(error){
-        return <h2>{error.message}. try again</h2>
+    if (error) {
+        return <h2>{error.message}. try again</h2>;
     }
 
     // Loading state while fetching data
@@ -40,7 +44,7 @@ const Body = () => {
     // UI with data
     return (
         <>
-            <div className="searchbar">
+            {/* <div className="searchbar">
                 <input
                     type="text"
                     value={searchText}
@@ -51,11 +55,23 @@ const Body = () => {
                 <button type="button" onClick={handleSearch}>
                     Search
                 </button>
-            </div>
+            </div> */}
+            <SearchBar handleSearch={handleSearch}>
+                <input
+                    type="text"
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleSearch(e)}
+                    placeholder="Search your favorite food"
+                    id="simple-search"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-pink-100"
+                    required
+                />
+            </SearchBar>
 
-            {filteredRestaurants.length ? (
+            {filteredRestaurants ? (
                 <div className="restaurant-list">
-                    {filteredRestaurants?.map((item) => (
+                    {filteredRestaurants.map((item) => (
                         <Link
                             to={"/restaurant/" + item.data.id}
                             key={item?.data?.id}
@@ -65,7 +81,7 @@ const Body = () => {
                     ))}
                 </div>
             ) : (
-                <p> No data found! search another food.</p>
+                <p> No data found!</p>
             )}
         </>
     );
