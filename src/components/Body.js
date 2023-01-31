@@ -23,7 +23,7 @@ const Body = () => {
         e.preventDefault();
         if(!allRestaurants) return;
         const filteredData = filterData(allRestaurants, searchText);
-        setFilteredRestaurants(filteredData);
+        setFilteredRestaurants(filteredData.length ? filteredData : null);
     };
     // Early exit if user is not online
     if (!onLine) {
@@ -44,18 +44,6 @@ const Body = () => {
     // UI with data
     return (
         <>
-            {/* <div className="searchbar">
-                <input
-                    type="text"
-                    value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                    placeholder="Search your favorite food"
-                />
-                <button type="button" onClick={handleSearch}>
-                    Search
-                </button>
-            </div> */}
             <SearchBar handleSearch={handleSearch}>
                 <input
                     type="text"
@@ -70,7 +58,7 @@ const Body = () => {
             </SearchBar>
 
             {filteredRestaurants ? (
-                <div className="restaurant-list">
+                <div className="grid grid-cols-5 gap-4 p-8">
                     {filteredRestaurants.map((item) => (
                         <Link
                             to={"/restaurant/" + item.data.id}
