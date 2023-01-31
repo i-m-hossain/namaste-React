@@ -10,7 +10,6 @@ import useOnLineChecker from "online-checker";
 import SearchBar from "./SearchBar.js";
 import Container from "./Container.js";
 
-
 const Body = () => {
     const [searchText, setSearchText] = useState("");
     const {
@@ -23,7 +22,7 @@ const Body = () => {
     const onLine = useOnLineChecker();
     const handleSearch = (e) => {
         e.preventDefault();
-        if(!allRestaurants) return;
+        if (!allRestaurants) return;
         const filteredData = filterData(allRestaurants, searchText);
         setFilteredRestaurants(filteredData.length ? filteredData : null);
     };
@@ -58,7 +57,6 @@ const Body = () => {
                     required
                 />
             </SearchBar>
-           
 
             {filteredRestaurants ? (
                 <Container title="Available Foods">
@@ -71,7 +69,6 @@ const Body = () => {
                         </Link>
                     ))}
                 </Container>
-                
             ) : (
                 <p> No data found!</p>
             )}
