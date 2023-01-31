@@ -2,7 +2,8 @@ import React from "react";
 import { BsSearch } from "react-icons/bs";
 function SearchBar({handleSearch, children}) {
     return (
-        <form className="flex items-center mx-8">
+        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+<form className="flex items-center">
             <label for="simple-search" className="sr-only">
                 Search
             </label>
@@ -33,6 +34,8 @@ function SearchBar({handleSearch, children}) {
                 <span className="sr-only">Search</span>
             </button>
         </form>
+        </div>
+        
     );
 }
 

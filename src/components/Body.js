@@ -8,6 +8,8 @@ import { useState } from "react";
 // my npm module
 import useOnLineChecker from "online-checker";
 import SearchBar from "./SearchBar.js";
+import Container from "./Container.js";
+
 
 const Body = () => {
     const [searchText, setSearchText] = useState("");
@@ -56,9 +58,10 @@ const Body = () => {
                     required
                 />
             </SearchBar>
+           
 
             {filteredRestaurants ? (
-                <div className="grid grid-cols-5 gap-4 p-8">
+                <Container title="Available Foods">
                     {filteredRestaurants.map((item) => (
                         <Link
                             to={"/restaurant/" + item.data.id}
@@ -67,7 +70,8 @@ const Body = () => {
                             <RestaurantCard {...item.data} />
                         </Link>
                     ))}
-                </div>
+                </Container>
+                
             ) : (
                 <p> No data found!</p>
             )}
