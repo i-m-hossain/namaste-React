@@ -19,6 +19,7 @@
   "homepage": "https://github.com/imranhAltersense/Namaste-react#readme",
   "devDependencies": {
     "@babel/core": "^7.20.7",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "parcel": "^2.8.2",
     "postcss": "^8.4.21",
