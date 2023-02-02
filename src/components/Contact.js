@@ -1,44 +1,58 @@
 import React, { useState } from "react";
-import { BsArrowDown, BsArrowUp } from "react-icons/bs";
+import { SlArrowUp, SlArrowDown } from "react-icons/sl";
+import { FAQList } from "../config";
 
-const Section = ({ title, description }) => {
-    const [isVisible, setIsVisible] = useState(false);
+const Section = ({ title, description, isVisible, setIsVisible }) => {
     return (
-        <div className="border border-red-400 p-2 m-2">
-            <div className="flex justify-between">
-                <h2 className="font-bold text-3xl">{title}</h2>
+        <div className={`border`}>
+            <div
+                className={`${
+                    isVisible && "bg-pink-100"
+                } flex justify-between p-2`}
+            >
+                <h2 className="font-bold  uppercase">{title} </h2>
                 {!isVisible ? (
                     <button
                         type="button"
-                        onClick={() => {
-                            setIsVisible(true);
-                        }}
+                        onClick={() => setIsVisible(true)}
+                        className="p-2 border bg-pink-50"
                     >
-                        <BsArrowDown />
+                        <SlArrowUp />
                     </button>
                 ) : (
                     <button
                         type="button"
-                        onClick={() => {
-                            setIsVisible(false);
-                        }}
+                        onClick={() => setIsVisible(false)}
+                        className="p-2 border bg-gray-100"
                     >
-                        <BsArrowUp />
+                        <SlArrowDown />
                     </button>
                 )}
             </div>
-            {isVisible && <p>{description}</p>}
+
+            {isVisible && <p className="p-2">{description}</p>}
         </div>
     );
 };
 const Contact = () => {
+    const [visibleSection, setVisibleSection] = useState({
+        [FAQList[0]["id"]]: true,
+    });
+
     return (
         <>
             <h2>FAQ:</h2>
-            <Section title="First title" description={"this is 1st FAq"} />
-            <Section title="Second Title" description={"this is 2nd FAq"} />
-            <Section title="Third title" description={"this is 3rd FAq"} />
-            <Section title="Fourth title" description={"this is 4th FAq"} />
+            {FAQList.map((item) => (
+                <Section
+                    title={item.title}
+                    description={item.description}
+                    isVisible={visibleSection[item.id]}
+                    setIsVisible={(status) =>
+                        setVisibleSection({ [item.id]: status })
+                    }
+                    key={item.id}
+                />
+            ))}
         </>
     );
 };

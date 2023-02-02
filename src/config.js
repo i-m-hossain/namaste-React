@@ -6,3 +6,30 @@ export const constants = {
     FETCH_MENU_URL:
         "https://www.swiggy.com/dapi/menu/v4/full?lat=28.7040592&lng=77.10249019999999&menuId=",
 };
+
+export const FAQList = [
+    {
+        id: 1,
+        title: "What are you selling?",
+        description:
+            "Nonprofits and education organizations are always in everyone’s interest because they direct their goals to community and social activities, so common FAQ questions for websites will be beneficial for internet users to learn about your organization. ",
+    },
+    {
+        id: 2,
+        title: "What does the guarantee cover?",
+        description:
+            "Nonprofits and education organizations are always in everyone’s interest because they direct their goals to community and social activities, so common FAQ questions for websites will be beneficial for internet users to learn about your organization. ",
+    },
+    {
+        id: 3,
+        title: "Where can I find you?",
+        description:
+            "Nonprofits and education organizations are always in everyone’s interest because they direct their goals to community and social activities, so common FAQ questions for websites will be beneficial for internet users to learn about your organization. ",
+    },
+    {
+        id: 4,
+        title: "How might I get in touch with you?",
+        description:
+            "Nonprofits and education organizations are always in everyone’s interest because they direct their goals to community and social activities, so common FAQ questions for websites will be beneficial for internet users to learn about your organization. ",
+    },
+];

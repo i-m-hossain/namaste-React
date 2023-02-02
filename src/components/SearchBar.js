@@ -1,9 +1,8 @@
 import React from "react";
 import { BsSearch } from "react-icons/bs";
-function SearchBar({handleSearch, children}) {
+function SearchBar({ handleSearch, children }) {
     return (
-        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-<form className="flex items-center">
+        <form className="flex items-center mb-4">
             <label htmlFor="simple-search" className="sr-only">
                 Search
             </label>
@@ -30,12 +29,10 @@ function SearchBar({handleSearch, children}) {
                 type="submit"
                 className="p-2.5 ml-2 text-sm font-medium text-white bg-pink-600 rounded-lg border border-pink-500 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
             >
-                <BsSearch size={20}/>
+                <BsSearch size={20} />
                 <span className="sr-only">Search</span>
             </button>
         </form>
-        </div>
-        
     );
 }
 

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import ReactDOM from "react-dom/client ";
 import "./index.css";
 import Header from "./components/Header";
@@ -12,20 +12,30 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import Login from "./components/Login";
 import Profile from "./components/ProfileClass";
 import Wrapper from "./components/Wrapper";
+import UserContext from "./context/UserContext";
 
 // lazy loading
 const About = lazy(() => import("./components/About"));
 
-const AppLayout = () => (
-    <>
-        <Header />
-        <Wrapper>
-            <Outlet />
-        </Wrapper>
+const AppLayout = () => {
+    const [user, setUser] = useState({
+        name: "Md Imran Hossain",
+        email: "imran.kuet14@gmail.com",
+    });
+    return (
+        <>
+            <UserContext.Provider value={{ user: user, setUser: setUser }}>
+                <Header />
+                <Wrapper>
+                    <Outlet />
+                </Wrapper>
 
-        <Foo.Footer />
-    </>
-);
+                <Foo.Footer />
+            </UserContext.Provider>
+        </>
+    );
+};
+
 const appRouter = createBrowserRouter([
     {
         path: "/",
