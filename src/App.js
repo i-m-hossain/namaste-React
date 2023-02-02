@@ -11,6 +11,7 @@ import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Login from "./components/Login";
 import Profile from "./components/ProfileClass";
+import Wrapper from "./components/Wrapper";
 
 // lazy loading
 const About = lazy(() => import("./components/About"));
@@ -18,7 +19,10 @@ const About = lazy(() => import("./components/About"));
 const AppLayout = () => (
     <>
         <Header />
-        <Outlet />
+        <Wrapper>
+            <Outlet />
+        </Wrapper>
+
         <Foo.Footer />
     </>
 );
