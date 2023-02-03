@@ -3,7 +3,7 @@ import { constants } from "../config";
 
 const useRestaurant = (resId) => {
     const [restaurant, setRestaurant] = useState(null);
-    const [error, setError] = useState("");
+    const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {

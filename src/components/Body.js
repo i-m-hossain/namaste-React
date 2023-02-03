@@ -37,8 +37,8 @@ const Body = () => {
     // Loading state while fetching data
     if (loading) {
         return (
-            <div style={{ display: "flex" }}>
-                <Shimmer length={5} />
+            <div className="flex flex-wrap">
+                <Shimmer length={6} />
             </div>
         );
     }

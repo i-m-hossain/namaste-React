@@ -1,6 +1,6 @@
 # Assignment -10 (Jo dikhta hai, bo bikta hai)
 
-## Explore all the ways of writing css.</li>
+## Explore all the ways of writing css.
 
     - separate file for css
     - inline css
