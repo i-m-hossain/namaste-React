@@ -1,12 +1,12 @@
-/* This example requires Tailwind CSS v3.0+ */
+
 import { useContext, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { HiMenu, HiX } from "react-icons/hi";
-// import { FaBeer } from 'react-icons/fa';
 import logo from "../assets/img/logo.svg";
 import { Link } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import { SlLogin, SlLogout } from "react-icons/sl";
+import useAvatar from "../hooks/useAvatar";
 
 const navigation = [
     { name: "about", link: "/about" },
@@ -16,7 +16,8 @@ const navigation = [
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(null);
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
+    const {avatar} = useAvatar(user.name)
     return (
         <div className="isolate bg-pink-100 mb-4">
             <div className="px-6 py-6 lg:px-8 border shadow-md ">
@@ -50,18 +51,11 @@ export default function Header() {
                                 {item.name.toUpperCase()}
                             </Link>
                         ))}
-                        <input
-                            type="text"
-                            value={user.name}
-                            className="border rounded"
-                            onChange={(e) =>
-                                setUser({...user, name: e.target.value})
-                            }
-                        />
+                        
                     </div>
 
                     <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center space-x-2 cursor-pointer">
-                        {user && <p>{user.name}</p>}
+                        {user && <img src={avatar} className="w-10"/>}
                         {isLoggedIn ? (
                             <>
                                 <button
