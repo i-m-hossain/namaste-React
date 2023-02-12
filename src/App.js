@@ -13,6 +13,8 @@ import Login from "./components/Login";
 import Profile from "./components/ProfileClass";
 import Wrapper from "./components/Wrapper";
 import UserContext from "./context/UserContext";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 // lazy loading
 const About = lazy(() => import("./components/About"));
@@ -23,7 +25,7 @@ const AppLayout = () => {
         email: "imran.kuet14@gmail.com",
     });
     return (
-        <>
+        <Provider store={store}>
             <UserContext.Provider value={{ user: user, setUser: setUser }}>
                 <Header />
                 <Wrapper>
@@ -32,7 +34,7 @@ const AppLayout = () => {
 
                 <Foo.Footer />
             </UserContext.Provider>
-        </>
+        </Provider>
     );
 };
 

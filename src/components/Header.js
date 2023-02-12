@@ -1,12 +1,14 @@
-/* This example requires Tailwind CSS v3.0+ */
 import { useContext, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { HiMenu, HiX } from "react-icons/hi";
-// import { FaBeer } from 'react-icons/fa';
 import logo from "../assets/img/logo.svg";
 import { Link } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import { SlLogin, SlLogout } from "react-icons/sl";
+import useAvatar from "../hooks/useAvatar";
+import { BsCart } from "react-icons/bs";
+import Cart from "./common/Cart";
+import { useSelector } from "react-redux";
 
 const navigation = [
     { name: "about", link: "/about" },
@@ -16,7 +18,8 @@ const navigation = [
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(null);
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
+    const { avatar } = useAvatar(user.name);
     return (
         <div className="isolate bg-pink-100 mb-4">
             <div className="px-6 py-6 lg:px-8 border shadow-md ">
@@ -50,18 +53,14 @@ export default function Header() {
                                 {item.name.toUpperCase()}
                             </Link>
                         ))}
-                        <input
-                            type="text"
-                            value={user.name}
-                            className="border rounded"
-                            onChange={(e) =>
-                                setUser({...user, name: e.target.value})
-                            }
-                        />
                     </div>
 
                     <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center space-x-2 cursor-pointer">
-                        {user && <p>{user.name}</p>}
+                        <Cart/>
+                        <div>
+                            {user && <img src={avatar} className="w-10" />}
+                        </div>
+
                         {isLoggedIn ? (
                             <>
                                 <button
@@ -124,12 +123,28 @@ export default function Header() {
                                     ))}
                                 </div>
                                 <div className="py-6">
-                                    <a
-                                        href="#"
-                                        className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
-                                    >
-                                        Log in
-                                    </a>
+                                    <Cart/>
+                                    {isLoggedIn ? (
+                                        <div className="flex items-center space-x-4">
+                                            <button
+                                                type="button"
+                                                className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
+                                            >
+                                                Log in
+                                            </button>
+                                            <SlLogin />
+                                        </div>
+                                    ) : (
+                                        <div className="flex items-center space-x-4">
+                                            <button
+                                                type="button"
+                                                className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
+                                            >
+                                                Log out
+                                            </button>
+                                            <SlLogout />
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
