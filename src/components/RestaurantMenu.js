@@ -4,6 +4,9 @@ import { constants } from "../config";
 import useRestaurant from "../hooks/useRestaurant";
 import Shimmer from "./Shimmer";
 import { AiOutlineStar } from "react-icons/ai";
+import RestaurantCard from "./RestaurantCard";
+import MenuItem from "./MenuItem";
+import MenuList from "./MenuList";
 
 function RestaurantMenu() {
     const { resId } = useParams();
@@ -15,8 +18,8 @@ function RestaurantMenu() {
     if (loading) {
         return <Shimmer />;
     }
-    if(!restaurant){
-        return <p>Data not found</p>
+    if (!restaurant) {
+        return <p>Data not found</p>;
     }
     return (
         <div className="min-w-screen  flex items-center p-5 lg:p-10 overflow-hidden relative">
@@ -48,13 +51,7 @@ function RestaurantMenu() {
                         </div>
                         <div>
                             <h2 className="font-semibold">Menu items:</h2>
-                            <div className="ml-4">
-                                {Object.values(restaurant?.menu?.items)
-                                    .slice(0, 3)
-                                    .map((item) => (
-                                        <li key={item?.id}>{item?.name}</li>
-                                    ))}
-                            </div>
+
                             <div>
                                 <div className="flex items-center space-x-2 mt-2">
                                     <div className="flex flex-col ">
@@ -80,20 +77,20 @@ function RestaurantMenu() {
                                     <span>|</span>
                                     <div className="flex flex-col ">
                                         <p className="ml-2">
-                                            ${restaurant?.costForTwo/1000}
+                                            ${restaurant?.costForTwo / 1000}
                                         </p>
 
                                         <h4>Cost for two</h4>
                                     </div>
                                 </div>
                             </div>
-                            <div className="inline-block align-bottom mt-4">
-                                <button className="bg-pink-300 opacity-75 hover:opacity-100 text-yellow-900 hover:text-gray-900 rounded-full px-10 py-2 font-semibold">
-                                    Add to cart
-                                </button>
-                            </div>
                         </div>
                     </div>
+                </div>
+                <h2 className="mt-4 font-bold text-2xl">Menus</h2>
+
+                <div className="flex space-x-6">
+                    <MenuList menu={restaurant?.menu?.items} />
                 </div>
             </div>
         </div>
