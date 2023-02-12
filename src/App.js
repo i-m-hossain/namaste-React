@@ -15,7 +15,8 @@ import Wrapper from "./components/Wrapper";
 import UserContext from "./context/UserContext";
 import { Provider } from "react-redux";
 import store from "./store/store";
-
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
 // lazy loading
 const About = lazy(() => import("./components/About"));
 
@@ -31,7 +32,7 @@ const AppLayout = () => {
                 <Wrapper>
                     <Outlet />
                 </Wrapper>
-
+                <ToastContainer  autoClose={500} hideProgressBar={true} closeButton={true} draggable={true} pauseOnHover={true}/>
                 <Foo.Footer />
             </UserContext.Provider>
         </Provider>

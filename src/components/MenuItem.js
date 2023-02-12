@@ -2,10 +2,20 @@ import React from "react";
 import { BsCartPlus, BsFillCartCheckFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { constants } from "../config.js";
-import { addItem } from "../store/slices/cartSlice.js";
+import { addItem, removeItem } from "../store/slices/cartSlice.js";
+import { ToastContainer, toast } from "react-toastify";
 function MenuItem(menu) {
     const dispatch = useDispatch();
     const { items } = useSelector((state) => state.cart);
+    const handleCart = () => {
+        if (items.find((item) => item.id === menu.id)) {
+            dispatch(removeItem(menu));
+            toast("item removed from cart!");
+            return;
+        }
+        dispatch(addItem(menu));
+        toast("item added to cart!");
+    };
     return (
         <div className="py-2 border-b-2 flex justify-between items-center ">
             <div>
@@ -24,11 +34,11 @@ function MenuItem(menu) {
                 <button
                     className={`${
                         menu.cloudinaryImageId
-                            ? "absolute bottom-0 left-0 right-0 align-middle bg-white/50 pl-7"
-                            : "px-4 border rounded"
+                            ? "absolute bottom-0 left-0 right-0 align-middle bg-white/75 pl-7"
+                            : "px-4  rounded"
                     } py-2  font-semibold uppercase`}
                     title="Add To Cart"
-                    onClick={() => dispatch(addItem(menu))}
+                    onClick={handleCart}
                 >
                     {items.find((item) => item.id === menu.id) ? (
                         <BsFillCartCheckFill
