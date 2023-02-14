@@ -1,6 +1,6 @@
-import { useContext } from "react";
+
+
 import { AiFillFacebook, AiFillGithub } from "react-icons/ai";
-import UserContext from "../context/UserContext";
 
 export const Footer = () => {
     return (

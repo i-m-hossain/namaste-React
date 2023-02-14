@@ -10,6 +10,7 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Login from "./components/Login";
+import CartItems from "./components/CartItems";
 import Profile from "./components/ProfileClass";
 import Wrapper from "./components/Wrapper";
 import UserContext from "./context/UserContext";
@@ -32,7 +33,7 @@ const AppLayout = () => {
                 <Wrapper>
                     <Outlet />
                 </Wrapper>
-                <ToastContainer  autoClose={500} hideProgressBar={true} closeButton={true} draggable={true} pauseOnHover={true}/>
+                <ToastContainer  autoClose={500} hideProgressBar={true} closeButton={true} draggable={true} pauseOnHover={true} position="bottom-right"/>
                 <Foo.Footer />
             </UserContext.Provider>
         </Provider>
@@ -47,6 +48,7 @@ const appRouter = createBrowserRouter([
         children: [
             {
                 path: "/about",
+                    
                 element: (
                     <Suspense fallback={<h1>loading...</h1>}>
                         <About />
@@ -56,6 +58,7 @@ const appRouter = createBrowserRouter([
                     { path: "profile", element: <Profile name="imran" /> },
                 ],
             },
+            { path: "/cart", element: <CartItems /> },
             { path: "/", element: <Body /> },
             { path: "/restaurant/:resId", element: <RestaurantMenu /> },
             { path: "/contact", element: <Contact /> },

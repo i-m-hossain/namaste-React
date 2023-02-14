@@ -35,7 +35,7 @@ const RestaurantCard = ({
                     </p>
                 </div>
                 <p className="text-sm font-medium text-gray-900">
-                    ${costForTwo / 100}
+                    {constants.currency}{costForTwo / 100}
                 </p>
             </div>
             

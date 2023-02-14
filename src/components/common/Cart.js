@@ -1,15 +1,15 @@
 import React from "react";
-import { useState } from "react";
 import { BsCart } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import CartItems from "../CartItems";
+import {useNavigate}  from "react-router-dom";
+
 
 function Cart({ iconSize = 25 }) {
     const { items } = useSelector((state) => state.cart);
-    const [cartVisible, setCartVisible] = useState(false);
+    const navigate = useNavigate()
     return (
         <div className="mr-8 relative">
-            <button onClick={() => setCartVisible(true)}>
+            <button onClick={() => navigate("/cart")}>
                 <BsCart size={iconSize} />
                 {items.length > 0 && (
                     <div className="absolute top-[-15px] left-5 border bg-[#ff3e00] rounded-full text-white w-7 h-7 text-center">
@@ -18,9 +18,7 @@ function Cart({ iconSize = 25 }) {
                 )}
             </button>
 
-            {cartVisible && (
-                <CartItems closeCartModal={() => setCartVisible(false)} />
-            )}
+            
         </div>
     );
 }
