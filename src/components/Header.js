@@ -6,9 +6,7 @@ import { Link } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import { SlLogin, SlLogout } from "react-icons/sl";
 import useAvatar from "../hooks/useAvatar";
-import { BsCart } from "react-icons/bs";
 import Cart from "./common/Cart";
-import { useSelector } from "react-redux";
 
 const navigation = [
     { name: "about", link: "/about" },

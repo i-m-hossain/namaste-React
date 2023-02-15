@@ -16,8 +16,8 @@ function MenuList({ menu }) {
                             }}
                             key={i}
                             className={`border-b-2 ${
-                                category === item && "border-pink-400"
-                            } py-2 block text-xl hover:text-pink-400`}
+                                category === item && "border-pink-400 text-lg font-bold"
+                            } py-2 block hover:text-pink-400`}
                         >
                             {item}
                         </button>
@@ -25,7 +25,7 @@ function MenuList({ menu }) {
                 )}
             </div>
             <div className="flex flex-col w-full">
-                <h2 className="font-semibold text-xl text-pink-400">
+                <h2 className=" text-lg font-bold text-pink-400">
                     {category ? category : "All food items"}
                 </h2>
                 {category

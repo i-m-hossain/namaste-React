@@ -4,8 +4,6 @@ import { constants } from "../config";
 import useRestaurant from "../hooks/useRestaurant";
 import Shimmer from "./Shimmer";
 import { AiOutlineStar } from "react-icons/ai";
-import RestaurantCard from "./RestaurantCard";
-import MenuItem from "./MenuItem";
 import MenuList from "./MenuList";
 
 function RestaurantMenu() {
@@ -22,17 +20,17 @@ function RestaurantMenu() {
         return <p>Data not found</p>;
     }
     return (
-        <div className="min-w-screen  flex items-center p-5 lg:p-10 overflow-hidden relative">
-            <div className="w-full max-w-6xl rounded bg-pink-50 shadow-xl p-10 lg:p-20 mx-auto text-gray-800 relative md:text-left">
+        <div className="min-w-screen  flex items-center p-5 lg:p-10 overflow-hidden ">
+            <div className="w-full max-w-6xl rounded bg-pink-50 shadow-xl p-10 lg:p-20 mx-auto text-gray-800  md:text-left">
                 <div className="md:flex items-center -mx-10">
                     <div className="w-full md:w-1/2 px-10 mb-10 md:mb-0">
-                        <div className="relative">
+                        <div >
                             <img
                                 src={`${constants.imagePrefix}/${restaurant?.cloudinaryImageId}`}
-                                className="w-full relative z-10 rounded"
+                                className="w-full  rounded"
                                 alt=""
                             />
-                            <div className="border-4 border-yellow-200 absolute top-10 bottom-10 left-10 right-10 z-0"></div>
+                            
                         </div>
                     </div>
                     <div className="w-full md:w-1/2 px-10">
@@ -77,7 +75,7 @@ function RestaurantMenu() {
                                     <span>|</span>
                                     <div className="flex flex-col ">
                                         <p className="ml-2">
-                                            ${restaurant?.costForTwo / 1000}
+                                            {constants.currency}{restaurant?.costForTwo / 1000}
                                         </p>
 
                                         <h4>Cost for two</h4>

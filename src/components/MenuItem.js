@@ -2,54 +2,74 @@ import React from "react";
 import { BsCartPlus, BsFillCartCheckFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { constants } from "../config.js";
-import { addItem } from "../store/slices/cartSlice.js";
+import { addItem, removeItem } from "../store/slices/cartSlice.js";
+import { ToastContainer, toast } from "react-toastify";
+import { HiMinus, HiPlus } from "react-icons/hi";
 function MenuItem(menu) {
     const dispatch = useDispatch();
     const { items } = useSelector((state) => state.cart);
+    const handleAddToCart = (step) => {
+        if (step === 1) {
+            dispatch(addItem(menu));
+            toast("item added to cart!");
+        } else {
+            if (items.find((item) => item.id === menu.id)) {
+                dispatch(removeItem(menu));
+                toast("item removed from cart!");
+                return;
+            }
+        }
+    };
     return (
-        <div className="py-2 border-b-2 flex justify-between items-center ">
+        <div className="py-8 border-b-2 flex justify-between items-center ">
             <div>
-                <h2 className="text-xl">{menu.name}</h2>
-                <p>${menu.price}</p>
+                <h2 className="">{menu.name}</h2>
+                <p>
+                    {constants.currency}
+                    {menu.price}
+                </p>
             </div>
             <div className="relative flex flex-col items-center justify-center">
                 {menu.cloudinaryImageId && (
                     <img
                         src={constants.imagePrefix + menu.cloudinaryImageId}
-                        className="w-20 h-20 border rounded object-cover"
+                        className="w-32 h-24 border rounded object-cover"
                         alt=""
                     />
                 )}
 
-                <button
+                <div
                     className={`${
                         menu.cloudinaryImageId
-                            ? "absolute bottom-0 left-0 right-0 align-middle bg-white/50 pl-7"
-                            : "px-4 border rounded"
-                    } py-2  font-semibold uppercase`}
+                            ? "absolute bottom-[-20px] left-0 right-0 align-middle w-3/4 mx-auto"
+                            : "px-2 w-24"
+                    } py-2   bg-white border rounded hover:shadow-lg mr-4 transition-all text-center`}
                     title="Add To Cart"
-                    onClick={() => dispatch(addItem(menu))}
                 >
                     {items.find((item) => item.id === menu.id) ? (
-                        <BsFillCartCheckFill
-                            size={30}
-                            className={
-                                menu.cloudinaryImageId
-                                    ? "text-gray-700"
-                                    : "text-black"
-                            }
-                        />
+                        <div className="flex items-center space-x-2 justify-center">
+                            <button onClick={() => handleAddToCart(-1)}>
+                                <HiMinus />
+                            </button>
+                            <button>
+                                {
+                                    items.filter((item) => item.id === menu.id)
+                                        .length
+                                }
+                            </button>
+                            <button onClick={() => handleAddToCart(1)}>
+                                <HiPlus />
+                            </button>
+                        </div>
                     ) : (
-                        <BsCartPlus
-                            size={30}
-                            className={
-                                menu.cloudinaryImageId
-                                    ? "text-gray-700"
-                                    : "text-black"
-                            }
-                        ></BsCartPlus>
+                        <button
+                            className="text-sm text-center uppercase"
+                            onClick={() => handleAddToCart(1)}
+                        >
+                            Add
+                        </button>
                     )}
-                </button>
+                </div>
             </div>
         </div>
     );
