@@ -2,7 +2,6 @@ import React from "react";
 import { constants } from "../config.js";
 
 function CartItem({ item }) {
-    console.log(item);
     return (
         <li class="flex py-6">
             <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">

@@ -19,7 +19,7 @@ export default function Header() {
     const { user } = useContext(UserContext);
     const { avatar } = useAvatar(user.name);
     return (
-        <div className="isolate bg-pink-100 mb-4">
+        <div className=" bg-pink-100 mb-8  relative sticky top-0 z-30">
             <div className="px-6 py-6 lg:px-8 border shadow-md ">
                 <nav
                     className="flex items-center justify-between"
@@ -91,7 +91,7 @@ export default function Header() {
                 >
                     <Dialog.Panel
                         focus="true"
-                        className="fixed inset-0 z-10 overflow-y-auto bg-white px-6 py-6 lg:hidden"
+                        className="fixed inset-0 z-50 overflow-y-auto bg-white px-6 py-6 lg:hidden"
                     >
                         <div className="flex items-center justify-between">
                             <a href="#" className="-m-1.5 p-1.5">

@@ -17,7 +17,7 @@ function MenuList({ menu }) {
                             key={i}
                             className={`border-b-2 ${
                                 category === item && "border-pink-400 text-lg font-bold"
-                            } py-2 block hover:text-pink-400`}
+                            } py-2 block hover:text-pink-400 text-left`}
                         >
                             {item}
                         </button>

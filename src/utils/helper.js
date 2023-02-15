@@ -3,3 +3,4 @@ export const filterData = (restaurants, searchTerm) => {
         item.data.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 };
+

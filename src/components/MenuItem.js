@@ -1,24 +1,22 @@
 import React from "react";
-import { BsCartPlus, BsFillCartCheckFill } from "react-icons/bs";
+
 import { useDispatch, useSelector } from "react-redux";
 import { constants } from "../config.js";
 import { addItem, removeItem } from "../store/slices/cartSlice.js";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { HiMinus, HiPlus } from "react-icons/hi";
 function MenuItem(menu) {
     const dispatch = useDispatch();
     const { items } = useSelector((state) => state.cart);
-    const handleAddToCart = (step) => {
-        if (step === 1) {
-            dispatch(addItem(menu));
-            toast("item added to cart!");
-        } else {
-            if (items.find((item) => item.id === menu.id)) {
-                dispatch(removeItem(menu));
-                toast("item removed from cart!");
-                return;
-            }
-        }
+    const handlePlus = () => {
+        dispatch(addItem(menu));
+    };
+    const handleMinus = () => {
+        dispatch(removeItem(menu));
+    };
+    const handleAddToCart = () => {
+        dispatch(addItem(menu));
+        toast("Item added to the cart");
     };
     return (
         <div className="py-8 border-b-2 flex justify-between items-center ">
@@ -48,7 +46,7 @@ function MenuItem(menu) {
                 >
                     {items.find((item) => item.id === menu.id) ? (
                         <div className="flex items-center space-x-2 justify-center">
-                            <button onClick={() => handleAddToCart(-1)}>
+                            <button onClick={handleMinus}>
                                 <HiMinus />
                             </button>
                             <button>
@@ -57,14 +55,14 @@ function MenuItem(menu) {
                                         .length
                                 }
                             </button>
-                            <button onClick={() => handleAddToCart(1)}>
+                            <button onClick={handlePlus}>
                                 <HiPlus />
                             </button>
                         </div>
                     ) : (
                         <button
                             className="text-sm text-center uppercase"
-                            onClick={() => handleAddToCart(1)}
+                            onClick={handleAddToCart}
                         >
                             Add
                         </button>
