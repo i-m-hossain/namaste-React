@@ -1,10 +1,11 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { constants } from "../config.js";
 import { removeItem } from "../store/slices/cartSlice.js";
 
 function CartItem({ item }) {
   const dispatch = useDispatch();
+  const { items } = useSelector((state) => state.cart);
   const handleRemove = () => {
     dispatch(removeItem(item));
   };
@@ -36,7 +37,9 @@ function CartItem({ item }) {
           <p class="mt-1 text-sm text-gray-500">{item.category}</p>
         </div>
         <div class="flex flex-1 items-end justify-between text-sm">
-          <p class="text-gray-500">Qty 1</p>
+          <p class="text-gray-500">
+            Qty {items.filter((it) => it.id === item.id).length}
+          </p>
 
           <div class="flex">
             <button
