@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const initialState = {
     items: [],
@@ -13,6 +14,7 @@ export const cartSlice = createSlice({
         },
         removeItem: (state, { payload, type }) => {
             state.items = state.items.filter((item) => item.id !== payload.id);
+            toast("item is removed from cart")
         },
     },
 });
