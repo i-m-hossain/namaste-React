@@ -1,7 +1,14 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { constants } from "../config.js";
+import { deleteFromCart } from "../store/slices/cartSlice.js";
 
 function CartItem({ item }) {
+    const dispatch = useDispatch();
+    const { items } = useSelector((state) => state.cart);
+    const handleRemove = () => {
+        dispatch(deleteFromCart(item));
+    };
     return (
         <li class="flex py-6">
             <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
@@ -22,18 +29,23 @@ function CartItem({ item }) {
                         <h3>
                             <a href="#">{item.name}</a>
                         </h3>
-                        <p class="ml-4">{constants.currency}{item.price}</p>
+                        <p class="ml-4">
+                            {constants.currency}
+                            {item.price}
+                        </p>
                     </div>
                     <p class="mt-1 text-sm text-gray-500">{item.category}</p>
                 </div>
                 <div class="flex flex-1 items-end justify-between text-sm">
-                    <p class="text-gray-500">Qty 1</p>
+                    <p class="text-gray-500">
+                        Qty {items.filter((it) => it.id === item.id).length}
+                    </p>
 
                     <div class="flex">
                         <button
                             type="button"
                             class="border py-2 px-3 bg-pink-200 rounded font-medium text-gray-400 hover:text-gray-800 hover:bg-pink-500"
-
+                            onClick={handleRemove}
                         >
                             Remove
                         </button>

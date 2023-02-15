@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-
+import { getUniqueCartItems } from "../utils/getUniqueCartItems";
 import CartItem from "./CartItem";
 import Wrapper from "./Wrapper";
 
@@ -18,12 +18,8 @@ console.log(items
                 </h4>
             )}
             <ul role="list" class="-my-6 divide-y divide-gray-200 mb-6 pb-6">
-                {items.length > 0 ? (
-                    items
-                        .reduce((prev, curr) => {
-                            if (prev.id === curr.id) return [...prev, curr];
-                        }, [])
-                        .map((item) => <CartItem item={item} />)
+                {items.length>0 ? (
+                    getUniqueCartItems(items).map((item) => <CartItem item={item}/>)
                 ) : (
                     <h4>There is no items in the cart</h4>
                 )}
