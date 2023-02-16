@@ -16,7 +16,7 @@ function MenuItem(menu) {
     };
     const handleAddToCart = () => {
         dispatch(addItem(menu));
-        toast("Item added to the cart");
+        toast("item is added to the cart");
     };
     return (
         <div className="py-8 border-b-2 flex justify-between items-center ">

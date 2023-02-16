@@ -11,7 +11,6 @@ export const cartSlice = createSlice({
     reducers: {
         addItem: (state, { payload, type }) => {
             state.items.push(payload);
-            toast("item is added to the cart");
         },
         removeItem: (state, { payload, type }) => {
             const target = state.items.findIndex(
@@ -23,9 +22,13 @@ export const cartSlice = createSlice({
             state.items = state.items.filter((item) => item.id !== payload.id);
             toast("item is removed from cart");
         },
+        clearCart: (state, { payload, type }) => {
+            state.items = [];
+        },
     },
 });
 
-export const { addItem, removeItem } = cartSlice.actions;
+export const { addItem, removeItem, deleteFromCart, clearCart } =
+    cartSlice.actions;
 
 export default cartSlice.reducer;
