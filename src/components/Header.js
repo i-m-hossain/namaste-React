@@ -7,7 +7,8 @@ import UserContext from "../context/UserContext";
 import { SlLogin, SlLogout } from "react-icons/sl";
 import useAvatar from "../hooks/useAvatar";
 import Cart from "./common/Cart";
-
+import useOnLineChecker from "online-checker";
+import { FaCheckCircle } from "react-icons/fa";
 const navigation = [
     { name: "about", link: "/about" },
     { name: "contact", link: "/contact" },
@@ -18,6 +19,7 @@ export default function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(null);
     const { user } = useContext(UserContext);
     const { avatar } = useAvatar(user.name);
+    const onLine = useOnLineChecker();
     return (
         <div className=" bg-pink-100 mb-8  relative sticky top-0 z-30">
             <div className="px-6 py-6 lg:px-8 border shadow-md ">
@@ -28,7 +30,12 @@ export default function Header() {
                     <div className="flex lg:flex-1">
                         <Link to="/" className="-m-1.5 p-1.5">
                             <span className="sr-only">Food U</span>
-                            <img className="h-8" src={logo} alt="" />
+                            <img
+                                className="h-8"
+                                src={logo}
+                                alt=""
+                                data-testid="logo"
+                            />
                         </Link>
                     </div>
                     <div className="flex lg:hidden">
@@ -54,9 +61,17 @@ export default function Header() {
                     </div>
 
                     <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center space-x-2 cursor-pointer">
-                        <Cart/>
-                        <div>
+                        <Cart />
+                        <div className="relative">
                             {user && <img src={avatar} className="w-10" />}
+                            {onLine && (
+                                <div
+                                    className="absolute top-[-15px] left-5 text-white w-7 h-7 text-center"
+                                    data-testid="online-status"
+                                >
+                                    <FaCheckCircle />
+                                </div>
+                            )}
                         </div>
 
                         {isLoggedIn ? (
@@ -121,7 +136,7 @@ export default function Header() {
                                     ))}
                                 </div>
                                 <div className="py-6">
-                                    <Cart/>
+                                    <Cart />
                                     {isLoggedIn ? (
                                         <div className="flex items-center space-x-4">
                                             <button

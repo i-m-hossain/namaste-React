@@ -63,6 +63,7 @@ function MenuItem(menu) {
                         <button
                             className="text-sm text-center uppercase"
                             onClick={handleAddToCart}
+                            data-testid="add-to-cart"
                         >
                             Add
                         </button>

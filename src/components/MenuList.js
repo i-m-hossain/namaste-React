@@ -3,7 +3,6 @@ import MenuItem from "./MenuItem";
 
 function MenuList({ menu }) {
     const [category, setCategory] = useState("");
-    console.log(menu);
 
     return (
         <>
