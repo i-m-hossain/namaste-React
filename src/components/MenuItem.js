@@ -24,7 +24,7 @@ function MenuItem(menu) {
                 <h2 className="">{menu.name}</h2>
                 <p>
                     {constants.currency}
-                    {menu.price}
+                    {menu.price/100}
                 </p>
             </div>
             <div className="relative flex flex-col items-center justify-center">
@@ -63,6 +63,7 @@ function MenuItem(menu) {
                         <button
                             className="text-sm text-center uppercase"
                             onClick={handleAddToCart}
+                            data-testid="add-to-cart"
                         >
                             Add
                         </button>

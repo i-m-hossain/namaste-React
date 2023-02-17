@@ -5,7 +5,7 @@ const Shimmer = ({ length }) => {
             {Array(length)
                 .fill("")
                 .map((item, i) => (
-                    <div className="shimmer-card" key={i}>
+                    <div className="shimmer-card" key={i} >
                         <div className="shimmerBG media"></div>
                         <div className="p-32">
                             <div className="shimmerBG title-line"></div>

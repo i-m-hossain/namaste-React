@@ -31,7 +31,7 @@ function CartItem({ item }) {
                         </h3>
                         <p className="ml-4">
                             {constants.currency}
-                            {item.price}
+                            {item.price/100}
                         </p>
                     </div>
                     <p className="mt-1 text-sm text-gray-500">{item.category}</p>
