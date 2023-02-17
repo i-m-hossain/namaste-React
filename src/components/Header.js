@@ -66,10 +66,10 @@ export default function Header() {
                             {user && <img src={avatar} className="w-10" />}
                             {onLine && (
                                 <div
-                                    className="absolute top-[-15px] left-5 text-white w-7 h-7 text-center"
+                                    className="absolute top-[-10px] left-6 text-white w-7 h-7 text-center"
                                     data-testid="online-status"
                                 >
-                                    <FaCheckCircle />
+                                    <FaCheckCircle color="green"/>
                                 </div>
                             )}
                         </div>

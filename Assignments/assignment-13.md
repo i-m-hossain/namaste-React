@@ -18,3 +18,6 @@ React-testing-library makes testing compared to Enzyme, a lot easier with all of
 However, there are limitations to react-testing-library, such as not being able to access component state (which might be intentional because you shouldn’t be doing that in theory).
 
 Besides Enzyme is not updated with latest React version and also React testing library is recommended by React
+
+## What is Jest and why do we use it?
+Jest is a JavaScript testing framework designed to ensure correctness of any JavaScript codebase. It allows you to write tests with an approachable, familiar and feature-rich API that gives you results quickly. Jest is well-documented, requires little configuration and can be extended to match your requirements.
